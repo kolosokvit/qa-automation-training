@@ -1,7 +1,8 @@
 package org.errorexception.university;
 
-import org.example.exceptions.FacultyWithNoGroupsException;
-import org.example.exceptions.NoStudentsWithSubjectException;
+
+import org.errorexception.exceptions.FacultyWithNoGroupsException;
+import org.errorexception.exceptions.NoStudentsWithSubjectException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Faculty {
 
     public double getAverageGradeBySubject(Subject subject) {
         if (groups == null || groups.isEmpty()) {
-            throw new FacultyWithNoGroupsException();
+            throw new FacultyWithNoGroupsException("There are no groups on this faculty.");
         }
         int totalStudentsWithSubject = 0;
         double totalAverageGradeBySubjectOnFaculty = 0;
@@ -29,7 +30,7 @@ public class Faculty {
             }
         }
         if (totalStudentsWithSubject == 0) {
-            throw new NoStudentsWithSubjectException();
+            throw new NoStudentsWithSubjectException("There are no students studying this subject on this faculty.");
         }
         return totalAverageGradeBySubjectOnFaculty / totalStudentsWithSubject;
     }

@@ -1,8 +1,9 @@
 package org.errorexception.university;
 
-import org.example.exceptions.GradeOutOfRangeException;
-import org.example.exceptions.StudentWithNoSubjectsException;
-import org.example.exceptions.StudentWithNoSuchSubjectException;
+
+import org.errorexception.exceptions.GradeOutOfRangeException;
+import org.errorexception.exceptions.StudentWithNoSubjectsException;
+import org.errorexception.exceptions.StudentWithNoSuchSubjectException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +28,10 @@ public class Student {
 
     public double getAverageGradeOneSubject(Subject subject) {
         if (grades == null || grades.isEmpty()) {
-            throw new StudentWithNoSubjectsException();
+            throw new StudentWithNoSubjectsException("This student hasn't any subject.");
         }
         if (!grades.containsKey(subject)) {
-            throw new StudentWithNoSuchSubjectException();
+            throw new StudentWithNoSuchSubjectException("This student doesn't study this subject.");
         }
         List<Integer> subjectGrades = grades.get(subject);
         int totalGrade = 0;
@@ -46,7 +47,7 @@ public class Student {
 
     public double getAverageGradeAllSubjects() {
         if (grades == null || grades.isEmpty()) {
-            throw new StudentWithNoSubjectsException();
+            throw new StudentWithNoSubjectsException("This student hasn't any subject.");
         }
         double totalGrade = 0;
         for (Map.Entry<Subject, ArrayList<Integer>> entry : grades.entrySet()) {
@@ -57,7 +58,7 @@ public class Student {
 
     public void addNewGradeBySubject(Subject subject, int newGrade) {
         if (newGrade < 0 || newGrade > 10) {
-            throw new GradeOutOfRangeException();
+            throw new GradeOutOfRangeException("Grade must be in 0-10 range.");
         }
         grades.get(subject).add(newGrade);
     }
