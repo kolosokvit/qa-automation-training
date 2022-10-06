@@ -36,6 +36,15 @@ public class University {
         return totalAverageGradeBySubject / totalStudentsWithSubject;
     }
 
+    public void addFacultyToUniversity(Faculty faculty) {
+        faculties.add(faculty);
+        for (Group group : faculty.getGroups()) {
+            for (Student student : group.getStudents()) {
+                student.setUniversity(this);
+            }
+        }
+    }
+
     public String getName() {
         return name;
     }

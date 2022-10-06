@@ -33,6 +33,11 @@ public class Group {
         return totalAverageGradeBySubjectInGroup / totalStudentsWithSubjectInGroup;
     }
 
+    public void addStudentToGroup(Student student) {
+        students.add(student);
+        student.setGroup(this);
+    }
+
     public int getNumber() {
         return number;
     }

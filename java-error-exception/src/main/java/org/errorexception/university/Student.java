@@ -18,12 +18,9 @@ public class Student {
     private University university;
     private Map<Subject, ArrayList<Integer>> grades = new HashMap<>();
 
-    public Student(String name, int id, Group group, Faculty faculty, University university) {
+    public Student(String name, int id) {
         this.name = name;
         this.id = id;
-        this.group = group;
-        this.faculty = faculty;
-        this.university = university;
     }
 
     public double getAverageGradeOneSubject(Subject subject) {
@@ -63,6 +60,14 @@ public class Student {
         grades.get(subject).add(newGrade);
     }
 
+    public void addGradesBySubject(Subject subject, ArrayList<Integer> gradesToAdd) {
+        if (!grades.containsKey(subject)) {
+            grades.put(subject, gradesToAdd);
+        } else {
+            grades.get(subject).addAll(gradesToAdd);
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -85,5 +90,33 @@ public class Student {
 
     public Map<Subject, ArrayList<Integer>> getGrades() {
         return grades;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", group=" + group.getNumber() +
+                ", faculty=" + faculty.getName() +
+                ", university=" + university.getName() +
+                ", grades=" + grades +
+                '}';
     }
 }
