@@ -2,6 +2,7 @@ package org.errorexception.university;
 
 import org.errorexception.exceptions.NoStudentsWithSubjectException;
 import org.errorexception.exceptions.UniversityWithNoFacultiesException;
+import org.errorexception.utils.ResultRounder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class University {
         if (totalStudentsWithSubject == 0) {
             throw new NoStudentsWithSubjectException("There are no students studying this subject in this university.");
         }
-        return totalAverageGradeBySubject / totalStudentsWithSubject;
+        return ResultRounder.round(totalAverageGradeBySubject / totalStudentsWithSubject);
     }
 
     public void addFacultyToUniversity(Faculty faculty) {

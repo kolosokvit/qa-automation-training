@@ -4,6 +4,7 @@ package org.errorexception.university;
 import org.errorexception.exceptions.GradeOutOfRangeException;
 import org.errorexception.exceptions.StudentWithNoSubjectsException;
 import org.errorexception.exceptions.StudentWithNoSuchSubjectException;
+import org.errorexception.utils.ResultRounder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class Student {
 
     public double getAverageGradeOneSubject(Subject subject) {
         if (grades == null || grades.isEmpty()) {
-            throw new StudentWithNoSubjectsException("This student hasn't any subject.");
+            throw new StudentWithNoSubjectsException("This student hasn't any subjects.");
         }
         if (!grades.containsKey(subject)) {
             throw new StudentWithNoSuchSubjectException("This student doesn't study this subject.");
@@ -39,18 +40,18 @@ public class Student {
             totalGrade += grade;
 
         }
-        return totalGrade / (subjectGrades.size() * 1.0);
+        return ResultRounder.round(totalGrade / (subjectGrades.size() * 1.0));
     }
 
     public double getAverageGradeAllSubjects() {
         if (grades == null || grades.isEmpty()) {
-            throw new StudentWithNoSubjectsException("This student hasn't any subject.");
+            throw new StudentWithNoSubjectsException("This student hasn't any subjects.");
         }
         double totalGrade = 0;
         for (Map.Entry<Subject, ArrayList<Integer>> entry : grades.entrySet()) {
             totalGrade += getAverageGradeOneSubject(entry.getKey());
         }
-        return totalGrade / grades.size();
+        return ResultRounder.round(totalGrade / grades.size());
     }
 
     public void addNewGradeBySubject(Subject subject, int newGrade) {

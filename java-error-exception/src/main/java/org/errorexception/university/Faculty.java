@@ -3,6 +3,7 @@ package org.errorexception.university;
 
 import org.errorexception.exceptions.FacultyWithNoGroupsException;
 import org.errorexception.exceptions.NoStudentsWithSubjectException;
+import org.errorexception.utils.ResultRounder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Faculty {
         if (totalStudentsWithSubject == 0) {
             throw new NoStudentsWithSubjectException("There are no students studying this subject on this faculty.");
         }
-        return totalAverageGradeBySubjectOnFaculty / totalStudentsWithSubject;
+        return ResultRounder.round(totalAverageGradeBySubjectOnFaculty / totalStudentsWithSubject);
     }
 
     public void addGroupToFaculty(Group group) {
