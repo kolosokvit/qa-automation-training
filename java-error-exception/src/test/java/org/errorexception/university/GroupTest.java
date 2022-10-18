@@ -1,5 +1,8 @@
 package org.errorexception.university;
 
+import org.errorexception.exceptions.GroupWithNoStudentsException;
+import org.errorexception.exceptions.NoStudentsWithSubjectException;
+import org.errorexception.exceptions.StudentWithNoSubjectsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,5 +45,17 @@ class GroupTest {
     void addStudentToGroup() {
         testGroup.addStudentToGroup(student1);
         Assertions.assertTrue(testGroup.getStudents().contains(student1));
+    }
+
+    @Test
+    void shouldThrowGroupWithNoStudentsException() {
+        Assertions.assertThrows(GroupWithNoStudentsException.class, () -> testGroup.getAverageGradeBySubject(Subject.PROGRAMMING_LANGUAGES_AND_LOGIC));
+    }
+
+    @Test
+    void shouldThrowNoStudentsWithSubjectException() {
+        testGroup.addStudentToGroup(student1);
+        testGroup.addStudentToGroup(student2);
+        Assertions.assertThrows(NoStudentsWithSubjectException.class, () -> testGroup.getAverageGradeBySubject(Subject.COMPUTER_GRAPHICS));
     }
 }

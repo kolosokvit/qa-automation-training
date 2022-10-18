@@ -1,5 +1,8 @@
 package org.errorexception.university;
 
+import org.errorexception.exceptions.GradeOutOfRangeException;
+import org.errorexception.exceptions.StudentWithNoSubjectsException;
+import org.errorexception.exceptions.StudentWithNoSuchSubjectException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,5 +46,21 @@ class StudentTest {
         student.addGradesBySubject(Subject.PROGRAMMING_LANGUAGES_AND_LOGIC, gradesToAdd);
         ArrayList<Integer> expectedGrades = new ArrayList<>(Arrays.asList(8, 9, 10, 9, 7, 8, 9));
         assertEquals(expectedGrades, student.getGrades().get(Subject.PROGRAMMING_LANGUAGES_AND_LOGIC));
+    }
+
+    @Test
+    void shouldThrowStudentWithNoSubjectsException() {
+        Student studentWithNoSubjects = new Student("Dave Clamp", 1002);
+        Assertions.assertThrows(StudentWithNoSubjectsException.class, () -> studentWithNoSubjects.getAverageGradeAllSubjects());
+    }
+
+    @Test
+    void shouldThrowStudentWithNoSuchSubjectException() {
+        Assertions.assertThrows(StudentWithNoSuchSubjectException.class, () -> student.getAverageGradeOneSubject(Subject.COMPUTER_GRAPHICS));
+    }
+
+    @Test
+    void shouldThrowGradeOutOfRangeException() {
+        Assertions.assertThrows(GradeOutOfRangeException.class, () -> student.addNewGradeBySubject(Subject.PROGRAMMING_LANGUAGES_AND_LOGIC, 11));
     }
 }
